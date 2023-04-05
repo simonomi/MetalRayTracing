@@ -39,7 +39,6 @@ struct Cube: Renderable {
 	init() {
 		triangles = Self.tris.map { tri in
 			Triangle(
-				type: 0,
 				vertices: (
 					Self.vertices[tri.0],
 					Self.vertices[tri.1],
@@ -56,8 +55,13 @@ struct Cube: Renderable {
 		self.triangles = triangles
 	}
 	
-	func getTriangles() -> [Triangle] { triangles }
-	func getBoundingBoxePrimatives() -> [BoundingBoxPrimative] { [] }
+	func getVertices() -> [SIMD3<Float>] {
+		getTriangles().flatMap { $0.getVertices() }
+	}
+	
+	func getTriangles() -> [Triangle] {
+		triangles
+	}
 	
 	func apply(_ operation: Operation) -> Cube {
 		Cube(triangles.map { $0.apply(operation) })

@@ -8,11 +8,12 @@
 import Metal
 
 extension Triangle: Renderable {
-	func getTriangles() -> [Triangle] { [self] }
-	func getBoundingBoxePrimatives() -> [BoundingBoxPrimative] { [] }
-	
 	func getVertices() -> [SIMD3<Float>] {
 		[vertices.0, vertices.1, vertices.2]
+	}
+	
+	func getTriangles() -> [Triangle] {
+		[self]
 	}
 	
 	func getNormal() -> SIMD3<Float> {
@@ -45,7 +46,6 @@ extension Triangle: Renderable {
 	// MARK: - scale
 	func scale(by scale: SIMD3<Float>) -> Triangle {
 		Triangle(
-			type: 0,
 			vertices: (
 				vertices.0 * scale,
 				vertices.1 * scale,
@@ -60,7 +60,6 @@ extension Triangle: Renderable {
 	// MARK: - translate
 	func translate(by displacement: SIMD3<Float>) -> Triangle {
 		Triangle(
-			type: 0,
 			vertices: (
 				vertices.0 + displacement,
 				vertices.1 + displacement,
@@ -101,7 +100,6 @@ extension Triangle: Renderable {
 		}
 		
 		return Triangle(
-			type: 0,
 			vertices: (
 				vertices.0 * rotationMatrix,
 				vertices.1 * rotationMatrix,
@@ -114,16 +112,15 @@ extension Triangle: Renderable {
 	}
 	
 	func color(_ color: Color) -> Triangle {
-		Triangle(type: 0, vertices: vertices, color: color.vector, reflectiveness: reflectiveness, emits: emits)
+		Triangle(vertices: vertices, color: color.vector, reflectiveness: reflectiveness, emits: emits)
 	}
 	
 	func emit() -> Triangle {
-		Triangle(type: 0, vertices: vertices, color: color, reflectiveness: reflectiveness, emits: 1)
+		Triangle(vertices: vertices, color: color, reflectiveness: reflectiveness, emits: 1)
 	}
 	
 	func reverseNormals() -> Triangle {
 		Triangle(
-			type: 0,
 			vertices: (
 				vertices.0,
 				vertices.2,
@@ -136,6 +133,6 @@ extension Triangle: Renderable {
 	}
 	
 	func reflectiveness(_ reflectiveness: Float)-> Triangle {
-		Triangle(type: 0, vertices: vertices, color: color, reflectiveness: reflectiveness, emits: emits)
+		Triangle(vertices: vertices, color: color, reflectiveness: reflectiveness, emits: emits)
 	}
 }

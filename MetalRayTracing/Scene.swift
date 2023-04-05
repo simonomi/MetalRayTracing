@@ -16,12 +16,12 @@ struct Scene: Renderable {
 		self.components = components
 	}
 	
-	func getTriangles() -> [Triangle] {
-		components.flatMap { $0.getTriangles() }
+	func getVertices() -> [SIMD3<Float>] {
+		components.flatMap { $0.getVertices() }
 	}
 	
-	func getBoundingBoxePrimatives() -> [BoundingBoxPrimative] {
-		components.flatMap { $0.getBoundingBoxePrimatives() }
+	func getTriangles() -> [Triangle] {
+		components.flatMap { $0.getTriangles() }
 	}
 	
 	mutating func add(_ component: Renderable) {

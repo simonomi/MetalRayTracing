@@ -8,12 +8,13 @@
 import Metal
 import MetalKit
 
+let framesToRender = 300
+
 class Renderer: NSObject, MTKViewDelegate {
 	let device: MTLDevice
 	let commandQueue: MTLCommandQueue
 	
 	let rayTracingPipeline: MTLComputePipelineState
-	let intersectionFunctionTable: MTLIntersectionFunctionTable
 	let copyPipeline: MTLRenderPipelineState
 	
 	var accelerationStructure: MTLAccelerationStructure!
@@ -21,6 +22,7 @@ class Renderer: NSObject, MTKViewDelegate {
 	let gpuLock = DispatchSemaphore(value: 1)
 	
 	let uniformsBuffer: MTLBuffer
+	let trianglesBuffer: MTLBuffer
 	var accumulationTargets = [MTLTexture]()
 	
 	var scene: Scene
@@ -31,7 +33,6 @@ class Renderer: NSObject, MTKViewDelegate {
 		
 		do {
 			rayTracingPipeline = try Self.buildRayTracingPipeline(device)
-			intersectionFunctionTable = try Self.buildIntersectionFunctionTable(rayTracingPipeline, device)
 			copyPipeline = try Self.buildCopyPipeline(device, metalKitView)
 		} catch {
 			print("Unable to compile pipeline states: \(error)")
@@ -51,41 +52,31 @@ class Renderer: NSObject, MTKViewDelegate {
 		
 		scene = scene4()
 		
+		let triangles = scene.getTriangles()
+		trianglesBuffer = device.makeBuffer(
+			bytes: triangles,
+			length: triangles.count * MemoryLayout<Triangle>.stride
+		)!
+		
 		super.init()
 		
 		mtkView(metalKitView, drawableSizeWillChange: metalKitView.drawableSize)
 		
-		createAccelerationStructure(for: scene)
+		let vertices = scene.getVertices()
+		let vertexBuffer = device.makeBuffer(
+			bytes: vertices,
+			length: vertices.count * MemoryLayout<SIMD3<Float>>.stride
+		)!
+		
+		createAccelerationStructure(vertexBuffer, triangleCount: triangles.count)
 	}
 	
 	static func buildRayTracingPipeline(_ device: MTLDevice) throws -> MTLComputePipelineState {
 		let library = device.makeDefaultLibrary()!
 		
-		let pipelineDescriptor = MTLComputePipelineDescriptor()
-		
 		let computeFunction = library.makeFunction(name: "rayTracingKernel")!
-		pipelineDescriptor.computeFunction = computeFunction
-		
-		let linkedFunctions = MTLLinkedFunctions()
-		let sphereIntersectionFunction = library.makeFunction(name: "sphereIntersectionFunction")!
-		linkedFunctions.functions = [sphereIntersectionFunction]
-		pipelineDescriptor.linkedFunctions = linkedFunctions
 		
 		return try device.makeComputePipelineState(function: computeFunction)
-	}
-	
-	static func buildIntersectionFunctionTable(_ rayTracingPipeline: MTLComputePipelineState, _ device: MTLDevice) -> MTLIntersectionFunctionTable {
-		let intersectionFunctionTableDescriptor = MTLIntersectionFunctionTableDescriptor()
-		intersectionFunctionTableDescriptor.functionCount = 2
-		
-		let intersectionFunctionTable = rayTracingPipeline.makeIntersectionFunctionTable(descriptor: intersectionFunctionTableDescriptor)!
-		
-		let library = device.makeDefaultLibrary()!
-		let sphereIntersectionFunction = library.makeFunction(name: "sphereIntersectionFunction")!
-		let sphereIntersectionFunctionHandle = rayTracingPipeline.functionHandle(function: sphereIntersectionFunction)
-		intersectionFunctionTable.setFunction(sphereIntersectionFunctionHandle, index: 0)
-		
-		return intersectionFunctionTable
 	}
 	
 	static func buildCopyPipeline(_ device: MTLDevice, _ metalKitView: MTKView) throws -> MTLRenderPipelineState {
@@ -99,95 +90,24 @@ class Renderer: NSObject, MTKViewDelegate {
 		return try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
 	}
 	
-	func createAccelerationStructure(for renderable: Renderable) {
-		// triangles
-		let triangleGeometryDescriptor = MTLAccelerationStructureTriangleGeometryDescriptor()
+	func createAccelerationStructure(_ vertexBuffer: MTLBuffer, triangleCount: Int) {
+		let accelerationStructureDescriptor = MTLPrimitiveAccelerationStructureDescriptor()
 		
-		let triangles = renderable.getTriangles()
-		let trianglePrimitiveData = device.makeBuffer(
-			bytes: triangles,
-			length: MemoryLayout<Triangle>.stride * triangles.count
-		)
-		let triangleVertexBuffer = device.makeBuffer(
-			bytes: triangles.flatMap { $0.getVertices() },
-			length: MemoryLayout<SIMD3<Float>>.stride * triangles.count * 3
-		)
+		let geometryDescriptor = MTLAccelerationStructureTriangleGeometryDescriptor()
 		
-		triangleGeometryDescriptor.vertexBuffer = triangleVertexBuffer
-		triangleGeometryDescriptor.vertexStride = MemoryLayout<SIMD3<Float>>.stride
-		triangleGeometryDescriptor.triangleCount = triangles.count
+		geometryDescriptor.vertexBuffer = vertexBuffer
+		geometryDescriptor.vertexStride = MemoryLayout<SIMD3<Float>>.stride
 		
-		triangleGeometryDescriptor.primitiveDataBuffer = trianglePrimitiveData
-		triangleGeometryDescriptor.primitiveDataStride = MemoryLayout<Triangle>.stride
-		triangleGeometryDescriptor.primitiveDataElementSize = MemoryLayout<Triangle>.size
+		geometryDescriptor.primitiveDataBuffer = trianglesBuffer
+		geometryDescriptor.primitiveDataStride = MemoryLayout<Triangle>.stride
+		geometryDescriptor.primitiveDataElementSize = MemoryLayout<Triangle>.size
 		
-		let triangleAccelerationStructureDescriptor = MTLPrimitiveAccelerationStructureDescriptor()
+		geometryDescriptor.triangleCount = triangleCount
 		
-		triangleAccelerationStructureDescriptor.geometryDescriptors = [triangleGeometryDescriptor]
+		accelerationStructureDescriptor.geometryDescriptors = [geometryDescriptor]
 		
-		let triangleAccelerationStructure = createAccelerationStructure(from: triangleAccelerationStructureDescriptor, with: device)
-		
-		// bounding boxes
-		let boundingBoxPrimatives = renderable.getBoundingBoxePrimatives()
-		let boundingBoxPrimitiveData = device.makeBuffer(
-			bytes: boundingBoxPrimatives,
-			length: MemoryLayout<BoundingBoxPrimative>.stride
-		)
-		let boundingBoxBuffer = device.makeBuffer(
-			bytes: boundingBoxPrimatives.map { $0.getBoundingBox() },
-			length: MemoryLayout<BoundingBox>.stride
-		)
-		
-		let boundingBoxGeometryDescriptor = MTLAccelerationStructureBoundingBoxGeometryDescriptor()
-		
-		boundingBoxGeometryDescriptor.boundingBoxBuffer = boundingBoxBuffer
-		boundingBoxGeometryDescriptor.boundingBoxStride = MemoryLayout<BoundingBox>.stride
-		boundingBoxGeometryDescriptor.boundingBoxCount = boundingBoxPrimatives.count
-		
-		boundingBoxGeometryDescriptor.primitiveDataBuffer = boundingBoxPrimitiveData
-		boundingBoxGeometryDescriptor.primitiveDataStride = MemoryLayout<Renderable>.stride
-		boundingBoxGeometryDescriptor.primitiveDataElementSize = MemoryLayout<Renderable>.size
-		
-		boundingBoxGeometryDescriptor.intersectionFunctionTableOffset = 0
-		
-		let boundingBoxAccelerationStructureDescriptor = MTLPrimitiveAccelerationStructureDescriptor()
-		
-		boundingBoxAccelerationStructureDescriptor.geometryDescriptors = [boundingBoxGeometryDescriptor]
-		
-		let boundingBoxAccelerationStructure = createAccelerationStructure(from: boundingBoxAccelerationStructureDescriptor, with: device)
-		
-		// combined instanceAccelerationStructure
-		let accelerationStructureDescriptor = MTLInstanceAccelerationStructureDescriptor()
-		
-		let instanceDescriptors = (0...1).map {
-			var instanceDescriptor = MTLAccelerationStructureInstanceDescriptor()
-			instanceDescriptor.accelerationStructureIndex = UInt32($0)
-			instanceDescriptor.mask = UInt32($0)
-//			instanceDescriptor.intersectionFunctionTableOffset = 0
-//			instanceDescriptor.options =
-			return instanceDescriptor
-		}
-		
-		let instanceDescriptorBuffer = device.makeBuffer(
-			bytes: instanceDescriptors,
-			length: MemoryLayout<MTLAccelerationStructureInstanceDescriptor>.stride * instanceDescriptors.count
-		)
-		
-		accelerationStructureDescriptor.instanceDescriptorBuffer = instanceDescriptorBuffer
-		accelerationStructureDescriptor.instancedAccelerationStructures = [
-			triangleAccelerationStructure, boundingBoxAccelerationStructure
-		]
-		accelerationStructureDescriptor.instanceCount = instanceDescriptors.count
-		
-		accelerationStructure = createAccelerationStructure(from: accelerationStructureDescriptor, with: device)
-	}
-	
-	func createAccelerationStructure(
-		from accelerationStructureDescriptor: MTLAccelerationStructureDescriptor,
-		with device: MTLDevice
-	) -> MTLAccelerationStructure {
 		let sizes = device.accelerationStructureSizes(descriptor: accelerationStructureDescriptor)
-		let accelerationStructure = device.makeAccelerationStructure(size: sizes.accelerationStructureSize)!
+		accelerationStructure = device.makeAccelerationStructure(size: sizes.accelerationStructureSize)!
 		let scratchBuffer = device.makeBuffer(length: sizes.buildScratchBufferSize, options: .storageModePrivate)!
 		
 		let commandBuffer = commandQueue.makeCommandBuffer()!
@@ -202,8 +122,6 @@ class Renderer: NSObject, MTKViewDelegate {
 		
 		commandEncoder.endEncoding()
 		commandBuffer.commit()
-		
-		return accelerationStructure
 	}
 	
 	func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
@@ -221,6 +139,7 @@ class Renderer: NSObject, MTKViewDelegate {
 		accumulationTargets = (0..<2).map { _ in device.makeTexture(descriptor: textureDescriptor)! }
 		
 		updateUniforms(size: size)
+		view.isPaused = false
 	}
 	
 	func updateUniforms(size: CGSize) {
@@ -231,6 +150,7 @@ class Renderer: NSObject, MTKViewDelegate {
 		
 		let fieldOfView = 45.degreesToRadians
 		
+		// TODO: improve cleanliness?
 		let aspectRatio = Float(size.width / size.height)
 		let imagePlaneWidth: Float, imagePlaneHeight: Float
 		if size.width < size.height {
@@ -253,15 +173,20 @@ class Renderer: NSObject, MTKViewDelegate {
 		let uniformsPointer = uniformsBuffer.contents().bindMemory(to: Uniforms.self, capacity: 1)
 		uniformsPointer.pointee.frameNumber += 1
 		
-		guard let commandBuffer = commandQueue.makeCommandBuffer() else { return }
+		if uniformsPointer.pointee.frameNumber > framesToRender {
+			view.isPaused = true
+			gpuLock.signal()
+			print("render complete")
+			return
+		}
 		
-		guard let computeEncoder = commandBuffer.makeComputeCommandEncoder() else { return }
+		let commandBuffer = commandQueue.makeCommandBuffer()!
+		let computeEncoder = commandBuffer.makeComputeCommandEncoder()!
 		
 		computeEncoder.setBuffer(uniformsBuffer, offset: 0, index: 0)
 		computeEncoder.setTexture(accumulationTargets[0], index: 0)
 		computeEncoder.setTexture(accumulationTargets[1], index: 1)
 		computeEncoder.setAccelerationStructure(accelerationStructure, bufferIndex: 1)
-		computeEncoder.setIntersectionFunctionTable(intersectionFunctionTable, bufferIndex: 2)
 		
 		computeEncoder.setComputePipelineState(rayTracingPipeline)
 		
@@ -278,8 +203,8 @@ class Renderer: NSObject, MTKViewDelegate {
 		
 		accumulationTargets.swapAt(0, 1)
 		
-		guard let renderPassDescriptor = view.currentRenderPassDescriptor else { return }
-		guard let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else { return }
+		let renderPassDescriptor = view.currentRenderPassDescriptor!
+		let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor)!
 		
 		renderEncoder.setRenderPipelineState(copyPipeline)
 		renderEncoder.setFragmentTexture(accumulationTargets[0], index: 0)

@@ -7,32 +7,12 @@
 
 import Metal
 
-enum Axis {
-	case xAxis, yAxis, zAxis
-}
-
-struct Color {
-	var vector: SIMD3<Float>
+protocol Renderable {
+	func getVertices() -> [SIMD3<Float>]
 	
-	static let black = 		Color(0, 0, 0)
-	static let grey = 		Color(0.5, 0.5, 0.5)
-	static let white = 		Color(1, 1, 1)
-//	static let red =		Color(1, 0, 0)
-	static let red =		Color(0.85, 0.31, 0.25)
-	static let orange =		Color(0.93, 0.46, 0.18)
-//	static let yellow =		Color(1, 1, 0)
-	static let yellow =		Color(0.95, 0.75, 0.26)
-//	static let green =		Color(0, 1, 0)
-	static let green =		Color(0.35, 0.65, 0.36)
-//	static let teal =		Color(0, 1, 1)
-	static let teal =		Color(0.41, 0.73, 0.77)
-//	static let blue =		Color(0, 0, 1)
-	static let blue =		Color(0.33, 0.51, 0.93)
-	static let magenta =	Color(1, 0, 1)
+	func getTriangles() -> [Triangle]
 	
-	init(_ red: Float, _ green: Float, _ blue: Float) {
-		vector = SIMD3(red, green, blue)
-	}
+	func apply(_ operation: Operation) -> Self
 }
 
 enum Operation {
@@ -45,16 +25,32 @@ enum Operation {
 	case reflectiveness(Float)
 }
 
-protocol Renderable {
-	func getTriangles() -> [Triangle]
-	
-	func getBoundingBoxePrimatives() -> [BoundingBoxPrimative]
-	
-	func apply(_ operation: Operation) -> Self
+enum Axis {
+	case xAxis, yAxis, zAxis
 }
 
-protocol BoundingBoxPrimative {
-	func getBoundingBox() -> BoundingBox
+struct Color {
+	var vector: SIMD3<Float>
+	
+	static let black = 		Color(0, 0, 0)
+	static let grey = 		Color(0.5, 0.5, 0.5)
+	static let white = 		Color(1, 1, 1)
+	//	static let red =		Color(1, 0, 0)
+	static let red =		Color(0.85, 0.31, 0.25)
+	static let orange =		Color(0.93, 0.46, 0.18)
+	//	static let yellow =		Color(1, 1, 0)
+	static let yellow =		Color(0.95, 0.75, 0.26)
+	//	static let green =		Color(0, 1, 0)
+	static let green =		Color(0.35, 0.65, 0.36)
+	//	static let teal =		Color(0, 1, 1)
+	static let teal =		Color(0.41, 0.73, 0.77)
+	//	static let blue =		Color(0, 0, 1)
+	static let blue =		Color(0.33, 0.51, 0.93)
+	static let magenta =	Color(1, 0, 1)
+	
+	init(_ red: Float, _ green: Float, _ blue: Float) {
+		vector = SIMD3(red, green, blue)
+	}
 }
 
 // MARK: - scale

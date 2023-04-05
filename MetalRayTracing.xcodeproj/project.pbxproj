@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		AB24542829DCE69700A0C9D0 /* Scenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB24542729DCE69700A0C9D0 /* Scenes.swift */; };
-		AB2C20CF29DD51FA00F99842 /* Sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2C20CE29DD51FA00F99842 /* Sphere.swift */; };
 		AB2C20D129DD9DC900F99842 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2C20D029DD9DC900F99842 /* BoundingBox.swift */; };
 		AB536E6129DAC19600276FC8 /* Renderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB536E6029DAC19600276FC8 /* Renderable.swift */; };
 		AB536E6329DAC23D00276FC8 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB536E6229DAC23D00276FC8 /* Scene.swift */; };
@@ -18,14 +17,12 @@
 		ABD257BF29D9F77400F10AB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABD257BD29D9F77400F10AB1 /* Main.storyboard */; };
 		ABD257C729D9F7D400F10AB1 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD257C629D9F7D400F10AB1 /* Renderer.swift */; };
 		ABD257CC29D9F86200F10AB1 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = ABD257CB29D9F86200F10AB1 /* Shaders.metal */; };
-		ABD257CF29DA05A900F10AB1 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD257CE29DA05A900F10AB1 /* Circle.swift */; };
 		ABD257D129DA300B00F10AB1 /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD257D029DA300B00F10AB1 /* Cube.swift */; };
 		ABD257D329DA3F4800F10AB1 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD257D229DA3F4800F10AB1 /* Triangle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AB24542729DCE69700A0C9D0 /* Scenes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.swift; sourceTree = "<group>"; };
-		AB2C20CE29DD51FA00F99842 /* Sphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
 		AB2C20D029DD9DC900F99842 /* BoundingBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 		AB536E6029DAC19600276FC8 /* Renderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderable.swift; sourceTree = "<group>"; };
 		AB536E6229DAC23D00276FC8 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
@@ -39,7 +36,6 @@
 		ABD257C829D9F85000F10AB1 /* MetalRayTracing-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MetalRayTracing-Bridging-Header.h"; sourceTree = "<group>"; };
 		ABD257CB29D9F86200F10AB1 /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 		ABD257CD29D9F87700F10AB1 /* ShaderDefinitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderDefinitions.h; sourceTree = "<group>"; };
-		ABD257CE29DA05A900F10AB1 /* Circle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
 		ABD257D029DA300B00F10AB1 /* Cube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
 		ABD257D229DA3F4800F10AB1 /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,9 +79,7 @@
 				AB536E6029DAC19600276FC8 /* Renderable.swift */,
 				AB536E6229DAC23D00276FC8 /* Scene.swift */,
 				ABD257D029DA300B00F10AB1 /* Cube.swift */,
-				AB2C20CE29DD51FA00F99842 /* Sphere.swift */,
 				ABD257D229DA3F4800F10AB1 /* Triangle.swift */,
-				ABD257CE29DA05A900F10AB1 /* Circle.swift */,
 				ABD257CB29D9F86200F10AB1 /* Shaders.metal */,
 				ABD257CD29D9F87700F10AB1 /* ShaderDefinitions.h */,
 				ABD257C829D9F85000F10AB1 /* MetalRayTracing-Bridging-Header.h */,
@@ -166,13 +160,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABD257CF29DA05A900F10AB1 /* Circle.swift in Sources */,
 				ABD257BA29D9F77200F10AB1 /* ViewController.swift in Sources */,
 				AB24542829DCE69700A0C9D0 /* Scenes.swift in Sources */,
 				AB2C20D129DD9DC900F99842 /* BoundingBox.swift in Sources */,
 				ABD257D129DA300B00F10AB1 /* Cube.swift in Sources */,
 				ABD257C729D9F7D400F10AB1 /* Renderer.swift in Sources */,
-				AB2C20CF29DD51FA00F99842 /* Sphere.swift in Sources */,
 				ABD257B829D9F77200F10AB1 /* AppDelegate.swift in Sources */,
 				ABD257D329DA3F4800F10AB1 /* Triangle.swift in Sources */,
 				ABD257CC29D9F86200F10AB1 /* Shaders.metal in Sources */,
