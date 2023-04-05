@@ -49,6 +49,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB2C20D229DDD98A00F99842 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				ABD257BD29D9F77400F10AB1 /* Main.storyboard */,
+				ABD257B729D9F77200F10AB1 /* AppDelegate.swift */,
+				ABD257B929D9F77200F10AB1 /* ViewController.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		AB2C20D329DDDA0200F99842 /* renderables */ = {
+			isa = PBXGroup;
+			children = (
+				AB536E6029DAC19600276FC8 /* Renderable.swift */,
+				AB536E6229DAC23D00276FC8 /* Scene.swift */,
+				ABD257D029DA300B00F10AB1 /* Cube.swift */,
+				ABD257D229DA3F4800F10AB1 /* Triangle.swift */,
+			);
+			path = renderables;
+			sourceTree = "<group>";
+		};
+		AB2C20D429DDDA2A00F99842 /* engine */ = {
+			isa = PBXGroup;
+			children = (
+				ABD257C629D9F7D400F10AB1 /* Renderer.swift */,
+				ABD257CB29D9F86200F10AB1 /* Shaders.metal */,
+				ABD257CD29D9F87700F10AB1 /* ShaderDefinitions.h */,
+			);
+			path = engine;
+			sourceTree = "<group>";
+		};
+		AB2C20D529DDDA5F00F99842 /* misc */ = {
+			isa = PBXGroup;
+			children = (
+				ABD257C829D9F85000F10AB1 /* MetalRayTracing-Bridging-Header.h */,
+				ABD257C029D9F77400F10AB1 /* MetalRayTracing.entitlements */,
+				ABD257BB29D9F77300F10AB1 /* Assets.xcassets */,
+			);
+			path = misc;
+			sourceTree = "<group>";
+		};
 		ABD257AB29D9F77200F10AB1 = {
 			isa = PBXGroup;
 			children = (
@@ -68,20 +109,11 @@
 		ABD257B629D9F77200F10AB1 /* MetalRayTracing */ = {
 			isa = PBXGroup;
 			children = (
-				ABD257BD29D9F77400F10AB1 /* Main.storyboard */,
-				ABD257B729D9F77200F10AB1 /* AppDelegate.swift */,
-				ABD257B929D9F77200F10AB1 /* ViewController.swift */,
+				AB2C20D229DDD98A00F99842 /* views */,
+				AB2C20D329DDDA0200F99842 /* renderables */,
 				AB24542729DCE69700A0C9D0 /* Scenes.swift */,
-				ABD257C629D9F7D400F10AB1 /* Renderer.swift */,
-				AB536E6029DAC19600276FC8 /* Renderable.swift */,
-				AB536E6229DAC23D00276FC8 /* Scene.swift */,
-				ABD257D029DA300B00F10AB1 /* Cube.swift */,
-				ABD257D229DA3F4800F10AB1 /* Triangle.swift */,
-				ABD257CB29D9F86200F10AB1 /* Shaders.metal */,
-				ABD257CD29D9F87700F10AB1 /* ShaderDefinitions.h */,
-				ABD257C829D9F85000F10AB1 /* MetalRayTracing-Bridging-Header.h */,
-				ABD257C029D9F77400F10AB1 /* MetalRayTracing.entitlements */,
-				ABD257BB29D9F77300F10AB1 /* Assets.xcassets */,
+				AB2C20D429DDDA2A00F99842 /* engine */,
+				AB2C20D529DDDA5F00F99842 /* misc */,
 			);
 			path = MetalRayTracing;
 			sourceTree = "<group>";
@@ -302,7 +334,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = MetalRayTracing/MetalRayTracing.entitlements;
+				CODE_SIGN_ENTITLEMENTS = MetalRayTracing/misc/MetalRayTracing.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -320,7 +352,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dragonia.MetalRayTracing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "MetalRayTracing/MetalRayTracing-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "MetalRayTracing/misc/MetalRayTracing-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -332,7 +364,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = MetalRayTracing/MetalRayTracing.entitlements;
+				CODE_SIGN_ENTITLEMENTS = MetalRayTracing/misc/MetalRayTracing.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -350,7 +382,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dragonia.MetalRayTracing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "MetalRayTracing/MetalRayTracing-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "MetalRayTracing/misc/MetalRayTracing-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

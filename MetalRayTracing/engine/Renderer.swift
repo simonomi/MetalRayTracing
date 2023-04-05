@@ -27,17 +27,12 @@ class Renderer: NSObject, MTKViewDelegate {
 	
 	var scene: Scene
 	
-	init?(metalKitView: MTKView) {
+	init(metalKitView: MTKView) {
 		device = metalKitView.device!
 		commandQueue = device.makeCommandQueue()!
 		
-		do {
-			rayTracingPipeline = try Self.buildRayTracingPipeline(device)
-			copyPipeline = try Self.buildCopyPipeline(device, metalKitView)
-		} catch {
-			print("Unable to compile pipeline states: \(error)")
-			return nil
-		}
+		rayTracingPipeline = Self.buildRayTracingPipeline(device)
+		copyPipeline = Self.buildCopyPipeline(device, metalKitView)
 		
 		var initialUniforms = Uniforms(
 			width: UInt32(metalKitView.drawableSize.width),
@@ -71,15 +66,15 @@ class Renderer: NSObject, MTKViewDelegate {
 		createAccelerationStructure(vertexBuffer, triangleCount: triangles.count)
 	}
 	
-	static func buildRayTracingPipeline(_ device: MTLDevice) throws -> MTLComputePipelineState {
+	static func buildRayTracingPipeline(_ device: MTLDevice) -> MTLComputePipelineState {
 		let library = device.makeDefaultLibrary()!
 		
 		let computeFunction = library.makeFunction(name: "rayTracingKernel")!
 		
-		return try device.makeComputePipelineState(function: computeFunction)
+		return try! device.makeComputePipelineState(function: computeFunction)
 	}
 	
-	static func buildCopyPipeline(_ device: MTLDevice, _ metalKitView: MTKView) throws -> MTLRenderPipelineState {
+	static func buildCopyPipeline(_ device: MTLDevice, _ metalKitView: MTKView) -> MTLRenderPipelineState {
 		let library = device.makeDefaultLibrary()!
 		
 		let pipelineDescriptor = MTLRenderPipelineDescriptor()
@@ -87,7 +82,7 @@ class Renderer: NSObject, MTKViewDelegate {
 		pipelineDescriptor.fragmentFunction = library.makeFunction(name: "copyFragment")
 		pipelineDescriptor.colorAttachments[0].pixelFormat = metalKitView.colorPixelFormat
 		
-		return try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
+		return try! device.makeRenderPipelineState(descriptor: pipelineDescriptor)
 	}
 	
 	func createAccelerationStructure(_ vertexBuffer: MTLBuffer, triangleCount: Int) {
