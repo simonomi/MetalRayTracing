@@ -111,14 +111,17 @@ extension Triangle: Renderable {
 		)
 	}
 	
+	// MARK: - color
 	func color(_ color: Color) -> Triangle {
 		Triangle(vertices: vertices, color: color.vector, reflectiveness: reflectiveness, emission: emission)
 	}
 	
+	// MARK: - emit
 	func emit(_ strength: Float) -> Triangle {
 		Triangle(vertices: vertices, color: color, reflectiveness: reflectiveness, emission: strength)
 	}
 	
+	// MARK: - reverse normals
 	func reverseNormals() -> Triangle {
 		Triangle(
 			vertices: (
@@ -132,6 +135,7 @@ extension Triangle: Renderable {
 		)
 	}
 	
+	// MARK: - reflectiveness
 	func reflectiveness(_ reflectiveness: Float)-> Triangle {
 		Triangle(vertices: vertices, color: color, reflectiveness: reflectiveness, emission: emission)
 	}

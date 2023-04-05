@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AB24542829DCE69700A0C9D0 /* Scenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB24542729DCE69700A0C9D0 /* Scenes.swift */; };
+		AB2C20D729DDDC7D00F99842 /* DegreesToRadians.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2C20D629DDDC7D00F99842 /* DegreesToRadians.swift */; };
 		AB536E6129DAC19600276FC8 /* Renderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB536E6029DAC19600276FC8 /* Renderable.swift */; };
 		AB536E6329DAC23D00276FC8 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB536E6229DAC23D00276FC8 /* Scene.swift */; };
 		ABD257B829D9F77200F10AB1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD257B729D9F77200F10AB1 /* AppDelegate.swift */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		AB24542729DCE69700A0C9D0 /* Scenes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.swift; sourceTree = "<group>"; };
+		AB2C20D629DDDC7D00F99842 /* DegreesToRadians.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DegreesToRadians.swift; sourceTree = "<group>"; };
 		AB536E6029DAC19600276FC8 /* Renderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderable.swift; sourceTree = "<group>"; };
 		AB536E6229DAC23D00276FC8 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		ABD257B429D9F77200F10AB1 /* MetalRayTracing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalRayTracing.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,6 +85,7 @@
 		AB2C20D529DDDA5F00F99842 /* misc */ = {
 			isa = PBXGroup;
 			children = (
+				AB2C20D629DDDC7D00F99842 /* DegreesToRadians.swift */,
 				ABD257C829D9F85000F10AB1 /* MetalRayTracing-Bridging-Header.h */,
 				ABD257C029D9F77400F10AB1 /* MetalRayTracing.entitlements */,
 				ABD257BB29D9F77300F10AB1 /* Assets.xcassets */,
@@ -194,6 +197,7 @@
 				ABD257D129DA300B00F10AB1 /* Cube.swift in Sources */,
 				ABD257C729D9F7D400F10AB1 /* Renderer.swift in Sources */,
 				ABD257B829D9F77200F10AB1 /* AppDelegate.swift in Sources */,
+				AB2C20D729DDDC7D00F99842 /* DegreesToRadians.swift in Sources */,
 				ABD257D329DA3F4800F10AB1 /* Triangle.swift in Sources */,
 				ABD257CC29D9F86200F10AB1 /* Shaders.metal in Sources */,
 				AB536E6129DAC19600276FC8 /* Renderable.swift in Sources */,

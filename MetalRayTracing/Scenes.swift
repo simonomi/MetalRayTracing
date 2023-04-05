@@ -5,24 +5,15 @@
 //  Created by simon pellerin on 2023-04-04.
 //
 
-// ~~a red cube with a white light very far above~~
-// an infinite glowing plane with a circle of blue cubes
+// an infinite glowing plane with a circle of blue cubes on top
 func scene1() -> Scene {
 	var scene = Scene()
-//	scene.add(
-//		Cube() // main boi
-//			.scale(by: 0.5)
-//			.rotate(.yAxis, by: 45.degreesToRadians)
-////			.translate(by: -0.4, on: .yAxis)
-//			.color(.red)
-//	)
 	for i in -10..<10 {
 		scene.add(
 			Cube()
 				.scale(by: 0.25)
 				.translate(by: 1, on: .zAxis)
 				.rotate(by: (18 * i).degreesToRadians, aroundThe: .yAxis)
-//				.translate(by: -0.15, on: .yAxis)
 				.color(.blue)
 		)
 	}
@@ -31,11 +22,10 @@ func scene1() -> Scene {
 			.scale(by: 50, on: .xAxis)
 			.scale(by: 0.1, on: .yAxis)
 			.scale(by: 50, on: .zAxis)
-			.translate(by: -0.5, on: .yAxis)
+			.translate(by: -0.25, on: .yAxis)
 			.color(.white)
 			.emit()
 	)
-//	scene = scene.translate(by: -1, on: .zAxis)
 	return scene
 }
 
@@ -134,6 +124,10 @@ func scene3() -> Scene {
 	return scene
 }
 
+// three cubes of varying reflectiveness
+// in a room with a red left wall, blue right wall,
+// green floor, white back, and white top
+// with a white light in the ceiling
 func scene4() -> Scene {
 	var scene = Scene()
 	scene.add(
