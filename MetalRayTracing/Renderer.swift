@@ -172,11 +172,12 @@ class Renderer: NSObject, MTKViewDelegate {
 		
 		let uniformsPointer = uniformsBuffer.contents().bindMemory(to: Uniforms.self, capacity: 1)
 		uniformsPointer.pointee.frameNumber += 1
+		print(uniformsPointer.pointee.frameNumber)
 		
-		if uniformsPointer.pointee.frameNumber > framesToRender {
+		if uniformsPointer.pointee.frameNumber == framesToRender {
 			view.isPaused = true
-			gpuLock.signal()
 			print("render complete")
+			gpuLock.signal()
 			return
 		}
 		

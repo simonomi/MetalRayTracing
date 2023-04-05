@@ -20,7 +20,7 @@ enum Operation {
 	case translate(SIMD3<Float>)
 	case rotate(Float, Axis)
 	case color(Color)
-	case emit
+	case emit(Float)
 	case reverseNormals
 	case reflectiveness(Float)
 }
@@ -109,8 +109,8 @@ extension Renderable {
 
 // MARK: - emit
 extension Renderable {
-	func emit() -> Self {
-		apply(.emit)
+	func emit(strength: Float = 1) -> Self {
+		apply(.emit(strength))
 	}
 }
 

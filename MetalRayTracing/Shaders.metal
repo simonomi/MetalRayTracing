@@ -5,7 +5,7 @@
 //  Created by simon pellerin on 2023-04-02.
 //
 
-#define MAX_BOUNCES 10
+#define MAX_BOUNCES 20
 #define RAYS_PER_PIXEL 1
 
 #include <metal_stdlib>
@@ -40,6 +40,9 @@ float3 traceRay(ray ray, thread uint* rngState, primitive_acceleration_structure
 	intersector<triangle_data> intersector;
 	intersection_result<triangle_data> intersection;
 	
+	intersector.assume_geometry_type(geometry_type::triangle);
+	intersector.force_opacity(forced_opacity::opaque);
+	
 	float3 rayColor = 1;
 	
 	for(int bounce = 0; bounce < MAX_BOUNCES + 1; bounce++) {
@@ -56,10 +59,10 @@ float3 traceRay(ray ray, thread uint* rngState, primitive_acceleration_structure
 			continue;
 		}
 		
-		rayColor *= triangle.color;
+		if (triangle.emission)
+			return rayColor * triangle.color * triangle.emission;
 		
-		if (triangle.emits)
-			return rayColor;
+		rayColor *= triangle.color;
 		
 		float3 normal = calculateNormal(triangle);
 		

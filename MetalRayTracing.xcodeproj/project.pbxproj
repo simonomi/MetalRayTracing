@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		AB24542829DCE69700A0C9D0 /* Scenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB24542729DCE69700A0C9D0 /* Scenes.swift */; };
-		AB2C20D129DD9DC900F99842 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2C20D029DD9DC900F99842 /* BoundingBox.swift */; };
 		AB536E6129DAC19600276FC8 /* Renderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB536E6029DAC19600276FC8 /* Renderable.swift */; };
 		AB536E6329DAC23D00276FC8 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB536E6229DAC23D00276FC8 /* Scene.swift */; };
 		ABD257B829D9F77200F10AB1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD257B729D9F77200F10AB1 /* AppDelegate.swift */; };
@@ -23,7 +22,6 @@
 
 /* Begin PBXFileReference section */
 		AB24542729DCE69700A0C9D0 /* Scenes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.swift; sourceTree = "<group>"; };
-		AB2C20D029DD9DC900F99842 /* BoundingBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 		AB536E6029DAC19600276FC8 /* Renderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderable.swift; sourceTree = "<group>"; };
 		AB536E6229DAC23D00276FC8 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		ABD257B429D9F77200F10AB1 /* MetalRayTracing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalRayTracing.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,7 +73,6 @@
 				ABD257B929D9F77200F10AB1 /* ViewController.swift */,
 				AB24542729DCE69700A0C9D0 /* Scenes.swift */,
 				ABD257C629D9F7D400F10AB1 /* Renderer.swift */,
-				AB2C20D029DD9DC900F99842 /* BoundingBox.swift */,
 				AB536E6029DAC19600276FC8 /* Renderable.swift */,
 				AB536E6229DAC23D00276FC8 /* Scene.swift */,
 				ABD257D029DA300B00F10AB1 /* Cube.swift */,
@@ -162,7 +159,6 @@
 			files = (
 				ABD257BA29D9F77200F10AB1 /* ViewController.swift in Sources */,
 				AB24542829DCE69700A0C9D0 /* Scenes.swift in Sources */,
-				AB2C20D129DD9DC900F99842 /* BoundingBox.swift in Sources */,
 				ABD257D129DA300B00F10AB1 /* Cube.swift in Sources */,
 				ABD257C729D9F7D400F10AB1 /* Renderer.swift in Sources */,
 				ABD257B829D9F77200F10AB1 /* AppDelegate.swift in Sources */,

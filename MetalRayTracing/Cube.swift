@@ -46,7 +46,7 @@ struct Cube: Renderable {
 				),
 				color: SIMD3.random(in: 0..<1),
 				reflectiveness: 0,
-				emits: 0
+				emission: 0
 			)
 		}
 	}

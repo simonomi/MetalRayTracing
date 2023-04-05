@@ -34,8 +34,8 @@ extension Triangle: Renderable {
 				return self.rotate(by: theta, aroundThe: axis)
 			case .color(let color):
 				return self.color(color)
-			case .emit:
-				return self.emit()
+			case .emit(let strength):
+				return self.emit(strength)
 			case .reverseNormals:
 				return self.reverseNormals()
 			case .reflectiveness(let reflectiveness):
@@ -53,7 +53,7 @@ extension Triangle: Renderable {
 			),
 			color: color,
 			reflectiveness: reflectiveness,
-			emits: emits
+			emission: emission
 		)
 	}
 
@@ -67,7 +67,7 @@ extension Triangle: Renderable {
 			),
 			color: color,
 			reflectiveness: reflectiveness,
-			emits: emits
+			emission: emission
 		)
 	}
 	
@@ -107,16 +107,16 @@ extension Triangle: Renderable {
 			),
 			color: color,
 			reflectiveness: reflectiveness,
-			emits: emits
+			emission: emission
 		)
 	}
 	
 	func color(_ color: Color) -> Triangle {
-		Triangle(vertices: vertices, color: color.vector, reflectiveness: reflectiveness, emits: emits)
+		Triangle(vertices: vertices, color: color.vector, reflectiveness: reflectiveness, emission: emission)
 	}
 	
-	func emit() -> Triangle {
-		Triangle(vertices: vertices, color: color, reflectiveness: reflectiveness, emits: 1)
+	func emit(_ strength: Float) -> Triangle {
+		Triangle(vertices: vertices, color: color, reflectiveness: reflectiveness, emission: strength)
 	}
 	
 	func reverseNormals() -> Triangle {
@@ -128,11 +128,11 @@ extension Triangle: Renderable {
 			),
 			color: color,
 			reflectiveness: reflectiveness,
-			emits: emits
+			emission: emission
 		)
 	}
 	
 	func reflectiveness(_ reflectiveness: Float)-> Triangle {
-		Triangle(vertices: vertices, color: color, reflectiveness: reflectiveness, emits: emits)
+		Triangle(vertices: vertices, color: color, reflectiveness: reflectiveness, emission: emission)
 	}
 }
