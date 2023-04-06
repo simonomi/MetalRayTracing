@@ -5,8 +5,6 @@
 //  Created by simon pellerin on 2023-04-03.
 //
 
-import Metal
-
 protocol Renderable {
 	func getVertices() -> [SIMD3<Float>]
 	func getTriangles() -> [Triangle]

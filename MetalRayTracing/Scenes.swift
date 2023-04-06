@@ -137,8 +137,17 @@ func scene4() -> Scene {
 			.scale(by: 0.5, on: .zAxis)
 			.translate(by: 0.625, on: .yAxis)
 			.color(.white)
-			.emit(strength: 4)
+			.emit(strength: 2)
 	)
+//	scene.add(
+//		Cube() // light
+//			.scale(by: 50, on: .xAxis)
+//			.scale(by: 50, on: .yAxis)
+//			.scale(by: 0.1, on: .zAxis)
+//			.translate(by: -2.1, on: .zAxis)
+//			.color(.white)
+//			.emit()
+//	)
 	scene.add(
 		Cube() // left wall
 			.scale(by: 0.01, on: .xAxis)

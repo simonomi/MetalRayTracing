@@ -8,7 +8,7 @@
 import Metal
 import MetalKit
 
-let framesToRender = 300
+let framesToRender = 1000
 
 class Renderer: NSObject, MTKViewDelegate {
 	let device: MTLDevice

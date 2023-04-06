@@ -5,8 +5,6 @@
 //  Created by simon pellerin on 2023-04-03.
 //
 
-import Metal
-
 struct Scene: Renderable {
 	var components = [Renderable]()
 	

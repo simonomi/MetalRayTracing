@@ -69,8 +69,7 @@ float3 traceRay(ray ray, thread uint* rngState, primitive_acceleration_structure
 		float3 intersectionPosition = ray.origin + ray.direction * intersection.distance;
 		ray.origin = intersectionPosition + normal * 0.01;
 		
-		float3 diffuseDirection = randomDirection(rngState);
-		diffuseDirection *= sign(dot(diffuseDirection, normal)); // flip towards normal if necessary
+		float3 diffuseDirection = normalize(normal + randomDirection(rngState));
 		
 		float3 specularDirection = ray.direction - 2 * dot(ray.direction, normal) * normal;
 		

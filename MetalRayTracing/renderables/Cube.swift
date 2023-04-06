@@ -5,8 +5,6 @@
 //  Created by simon pellerin on 2023-04-02.
 //
 
-import Metal
-
 struct Cube: Renderable {
 	var triangles: [Triangle]
 	

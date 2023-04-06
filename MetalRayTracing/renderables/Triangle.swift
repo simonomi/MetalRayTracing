@@ -5,8 +5,6 @@
 //  Created by simon pellerin on 2023-04-02.
 //
 
-import Metal
-
 extension Triangle: Renderable {
 	func getVertices() -> [SIMD3<Float>] {
 		[vertices.0, vertices.1, vertices.2]
