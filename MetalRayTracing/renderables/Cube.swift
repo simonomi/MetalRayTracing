@@ -5,7 +5,7 @@
 //  Created by simon pellerin on 2023-04-02.
 //
 
-struct Cube: Renderable {
+struct Cube {
 	var triangles: [Triangle]
 	
 	private static let vertices: [SIMD3<Float>] = [
@@ -42,7 +42,7 @@ struct Cube: Renderable {
 					Self.vertices[tri.1],
 					Self.vertices[tri.2]
 				),
-				color: SIMD3.random(in: 0..<1),
+				color: SIMD3<Float>(1, 1, 1),
 				reflectiveness: 0,
 				emission: 0
 			)
@@ -52,9 +52,11 @@ struct Cube: Renderable {
 	private init(_ triangles: [Triangle]) {
 		self.triangles = triangles
 	}
-	
+}
+
+extension Cube: Renderable {
 	func getVertices() -> [SIMD3<Float>] {
-		getTriangles().flatMap { $0.getVertices() }
+		triangles.flatMap { $0.getVertices() }
 	}
 	
 	func getTriangles() -> [Triangle] {

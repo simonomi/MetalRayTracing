@@ -5,6 +5,33 @@
 //  Created by simon pellerin on 2023-04-02.
 //
 
+extension Triangle {
+	init?(vertexString: String) {
+		let vertices = vertexString.split(separator: " ").compactMap(Float.init)
+		guard vertices.count == 9 else { return nil }
+		
+		self.init(
+			vertices: (
+				SIMD3<Float>(vertices[0], vertices[1], vertices[2]),
+				SIMD3<Float>(vertices[3], vertices[4], vertices[5]),
+				SIMD3<Float>(vertices[6], vertices[7], vertices[8])
+			),
+			color: SIMD3<Float>(1, 1, 1),
+			reflectiveness: 0,
+			emission: 0
+		)
+	}
+}
+
+extension Triangle: Equatable {
+	public static func == (lhs: Triangle, rhs: Triangle) -> Bool {
+		lhs.vertices == rhs.vertices &&
+		lhs.color == rhs.color &&
+		lhs.reflectiveness == rhs.reflectiveness &&
+		lhs.emission == rhs.emission
+	}
+}
+
 extension Triangle: Renderable {
 	func getVertices() -> [SIMD3<Float>] {
 		[vertices.0, vertices.1, vertices.2]
