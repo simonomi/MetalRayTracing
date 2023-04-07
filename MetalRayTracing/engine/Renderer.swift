@@ -25,7 +25,7 @@ class Renderer: NSObject, MTKViewDelegate {
 	let trianglesBuffer: MTLBuffer
 	var accumulationTargets = [MTLTexture]()
 	
-	var scene: Scene
+	var scene: Renderable
 	
 	init(metalKitView: MTKView) {
 		device = metalKitView.device!
@@ -45,7 +45,7 @@ class Renderer: NSObject, MTKViewDelegate {
 			length: MemoryLayout<Uniforms>.size
 		)!
 		
-		scene = scene4()
+		scene = scene3()
 		
 		let triangles = scene.getTriangles()
 		trianglesBuffer = device.makeBuffer(
