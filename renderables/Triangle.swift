@@ -48,7 +48,6 @@ extension Triangle: Renderable {
 		return normalize(cross(e1, e2));
 	}
 	
-	// MARK: - operations
 	func apply(_ operation: Operation) -> Triangle {
 		switch operation {
 			case .scale(let scale):
@@ -68,7 +67,6 @@ extension Triangle: Renderable {
 		}
 	}
 	
-	// MARK: - scale
 	func scale(by scale: SIMD3<Float>) -> Triangle {
 		Triangle(
 			vertices: (
@@ -82,7 +80,6 @@ extension Triangle: Renderable {
 		)
 	}
 
-	// MARK: - translate
 	func translate(by displacement: SIMD3<Float>) -> Triangle {
 		Triangle(
 			vertices: (
@@ -96,7 +93,6 @@ extension Triangle: Renderable {
 		)
 	}
 	
-	// MARK: - rotate
 	/// https://en.wikipedia.org/wiki/Rotation_matrix#In_three_dimensions
 	/// - Parameters:
 	///   - axis: the axis to rotate around
@@ -136,17 +132,14 @@ extension Triangle: Renderable {
 		)
 	}
 	
-	// MARK: - color
 	func color(_ color: Color) -> Triangle {
 		Triangle(vertices: vertices, color: color.vector, reflectiveness: reflectiveness, emission: emission)
 	}
 	
-	// MARK: - emit
 	func emit(_ strength: Float) -> Triangle {
 		Triangle(vertices: vertices, color: color, reflectiveness: reflectiveness, emission: strength)
 	}
 	
-	// MARK: - reverse normals
 	func reverseNormals() -> Triangle {
 		Triangle(
 			vertices: (
@@ -160,7 +153,6 @@ extension Triangle: Renderable {
 		)
 	}
 	
-	// MARK: - reflectiveness
 	func reflectiveness(_ reflectiveness: Float)-> Triangle {
 		Triangle(vertices: vertices, color: color, reflectiveness: reflectiveness, emission: emission)
 	}

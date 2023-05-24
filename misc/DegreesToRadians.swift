@@ -5,20 +5,14 @@
 //  Created by simon pellerin on 2023-04-05.
 //
 
-extension Int {
+extension BinaryInteger {
 	var degreesToRadians: Float {
 		Float(self) * .pi / 180
 	}
 }
 
-extension Float {
+extension BinaryFloatingPoint {
 	var degreesToRadians: Float {
-		self * .pi / 180
-	}
-}
-
-extension Double {
-	var degreesToRadians: Float {
-		Float(self * .pi / 180)
+		Float(self) * .pi / 180
 	}
 }
