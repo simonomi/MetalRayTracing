@@ -44,7 +44,8 @@ struct Cube {
 				),
 				color: SIMD3<Float>(1, 1, 1),
 				reflectiveness: 0,
-				emission: 0
+				emission: 0,
+				opacity: 0
 			)
 		}
 	}

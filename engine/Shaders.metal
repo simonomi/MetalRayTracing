@@ -64,6 +64,10 @@ float3 traceRay(ray ray, thread uint* rngState, primitive_acceleration_structure
 		
 		rayColor *= triangle.color;
 		
+//		if (triangle.opacity) {
+//			rayColor *= triangle.opacity;
+//		}
+		
 		float3 normal = calculateNormal(triangle);
 		
 		float3 intersectionPosition = ray.origin + ray.direction * intersection.distance;
@@ -73,7 +77,16 @@ float3 traceRay(ray ray, thread uint* rngState, primitive_acceleration_structure
 		
 		float3 specularDirection = ray.direction - 2 * dot(ray.direction, normal) * normal;
 		
+//		if (triangle.opacity) {
+//			if (pcg(rngState) > triangle.opacity) {
+//				float3 forward = ray.origin + ray.direction * (intersection.distance + 0.01);
+//				ray.direction = forward;
+//			} else {
+//				ray.direction = specularDirection;
+//			}
+//		} else {
 		ray.direction = triangle.reflectiveness * specularDirection + (1 - triangle.reflectiveness) * diffuseDirection;
+//		}
 	}
 	
 	return 0;

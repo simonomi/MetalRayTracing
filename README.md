@@ -19,10 +19,10 @@ Theres no export feature, no niceties, no pure spheres (mesh spheres only), no n
 
 | Ray tracing off | Ray tracing on |
 | - | - |
-| ![ray tracing off](https://github.com/simonomi/MetalRayTracing/blob/main/renders/scene3%20rasterized.png?raw=true) | ![ray tracing off](https://github.com/simonomi/MetalRayTracing/blob/main/renders/scene3.png?raw=true) |
+| ![ray tracing off](https://github.com/simonomi/MetalRayTracing/blob/main/renders/cube%20rasterized.png?raw=true) | ![ray tracing off](https://github.com/simonomi/MetalRayTracing/blob/main/renders/cube%20raytraced.png?raw=true) |
 
-![suzanne, the blender monkey, as a disco ball](https://github.com/simonomi/MetalRayTracing/blob/main/renders/scene3%20suzanne.png?raw=true)
-![a reflective velociraptor](https://github.com/simonomi/MetalRayTracing/blob/main/renders/scene3%20velociraptor.png?raw=true)
-![a red cube with a glowing white cube floating above it in a white box](https://github.com/simonomi/MetalRayTracing/blob/main/renders/scene2.png?raw=true)
-![three cubes of varying levels of reflectiveness](https://github.com/simonomi/MetalRayTracing/blob/main/renders/scene4.png?raw=true)
-![three spheres of varying levels of reflectiveness](https://github.com/simonomi/MetalRayTracing/blob/main/renders/scene4%20spheres.png?raw=true)
+![suzanne, the blender monkey, completely reflective](https://github.com/simonomi/MetalRayTracing/blob/main/renders/big%20monke.png?raw=true)
+![a large red reflective imp head in a box](https://github.com/simonomi/MetalRayTracing/blob/main/renders/imp.png?raw=true)
+![a reflective velociraptor](https://github.com/simonomi/MetalRayTracing/blob/main/renders/velociraptor.png?raw=true)
+![a red cube with a glowing white cube floating above it in a white box](https://github.com/simonomi/MetalRayTracing/blob/main/renders/red%20cube?raw=true)
+![three spheres of varying levels of reflectiveness](https://github.com/simonomi/MetalRayTracing/blob/main/renders/three%20spheres.png?raw=true)

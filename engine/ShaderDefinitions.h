@@ -27,6 +27,7 @@ struct Triangle {
 	vector_float3 color;
 	float reflectiveness;
 	float emission;
+	float opacity;
 };
 
 #endif /* ShaderDefinitions_h */

@@ -55,16 +55,39 @@
 			.scale(by: 0.1, on: .zAxis)
 			.translate(by: -2.1, on: .zAxis)
 			.emit()
-		Cube() // main boi
-			.scale(by: 0.5)
-			.rotate(by: 45.degreesToRadians, aroundThe: .yAxis)
-			.translate(by: -0.4, on: .yAxis)
-//		Mesh(.velociraptor)
-//			.scale(by: 0.00075)
-//			.translate(by: 0.1, on: .zAxis)
-//			.rotate(by: 225.degreesToRadians, aroundThe: .yAxis)
-//			.translate(by: -0.3, on: .yAxis)
+//		Cube() // main boi
+//			.scale(by: 0.5)
+//			.rotate(by: 45.degreesToRadians, aroundThe: .yAxis)
+//			.translate(by: -0.4, on: .yAxis)
+//		Cube() // blue transparent
+//			.scale(by: 0.35)
+//			.rotate(by: 45.degreesToRadians, aroundThe: .yAxis)
+//			.rotate(by: 45.degreesToRadians, aroundThe: .xAxis)
+//			.translate(by: -0.1, on: .yAxis)
+//			.translate(by: -0.3, on: .zAxis)
+//			.color(.blue)
+//			.opacity(0.75)
+//		Mesh(.bigMonke)
+//			.scale(by: 0.25)
+//			.rotate(by: 90.degreesToRadians, aroundThe: .xAxis)
+//			.rotate(by: 180.degreesToRadians, aroundThe: .yAxis)
+//			.translate(by: -0.2, on: .yAxis)
+//			.translate(by: -0.15, on: .zAxis)
 //			.reflectiveness(1)
+//		Mesh(.imp)
+//			.scale(by: 0.3)
+//			.rotate(by: 90.degreesToRadians, aroundThe: .xAxis)
+//			.rotate(by: -90.degreesToRadians, aroundThe: .yAxis)
+//			.color(.red)
+//			.reflectiveness(0.9)
+		Mesh(.velociraptor)
+			.scale(by: 0.0007)
+			.translate(by: 0.1, on: .zAxis)
+			.rotate(by: 225.degreesToRadians, aroundThe: .yAxis)
+			.translate(by: -0.3, on: .yAxis)
+			.translate(by: -0.55, on: .zAxis)
+			.translate(by: -0.05, on: .xAxis)
+			.reflectiveness(1)
 		Cube() // left wall
 			.scale(by: 0.01, on: .xAxis)
 			.scale(by: 1.25, on: .yAxis)
@@ -92,6 +115,12 @@
 			.scale(by: 1.25, on: .xAxis)
 			.scale(by: 1.25, on: .yAxis)
 			.scale(by: 0.01, on: .zAxis)
+			.translate(by: 0.625, on: .zAxis)
+			.color(.grey)
+		Cube() // front
+			.scale(by: 1.25, on: .xAxis)
+			.scale(by: 1.25, on: .yAxis)
+			.scale(by: 1.25, on: .zAxis)
 			.translate(by: 0.625, on: .zAxis)
 			.color(.grey)
 	}
@@ -141,14 +170,14 @@
 		Cube() // front wall
 			.scale(by: 2.75)
 			.translate(by: -2, on: .zAxis)
-		Mesh(.sphere) // left sphere - 50% reflectiveness
+		Mesh(.bigSphere) // left sphere - 50% reflectiveness
 			.scale(by: 0.25)
 			.translate(by: -0.5, on: .xAxis)
 			.reflectiveness(0.5)
-		Mesh(.sphere) // middle sphere - 75% reflectiveness
+		Mesh(.bigSphere) // middle sphere - 75% reflectiveness
 			.scale(by: 0.25)
 			.reflectiveness(0.75)
-		Mesh(.sphere) // right sphere - 100% reflectiveness
+		Mesh(.bigSphere) // right sphere - 100% reflectiveness
 			.scale(by: 0.25)
 			.translate(by: 0.5, on: .xAxis)
 			.reflectiveness(1)

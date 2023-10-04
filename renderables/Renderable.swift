@@ -19,6 +19,7 @@ enum Operation {
 	case emit(Float)
 	case reverseNormals
 	case reflectiveness(Float)
+	case opacity(Float)
 }
 
 enum Axis {
@@ -97,5 +98,9 @@ extension Renderable {
 	
 	func reflectiveness(_ reflectiveness: Float) -> Self {
 		apply(.reflectiveness(reflectiveness))
+	}
+	
+	func opacity(_ opacity: Float) -> Self {
+		apply(.opacity(opacity))
 	}
 }

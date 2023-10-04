@@ -12,8 +12,11 @@ struct Mesh {
 	var triangles: [Triangle]
 	
 	enum Asset: String {
+		case imp = "imp.vertices"
+		case bigSphere = "big sphere.vertices"
 		case sphere = "sphere.vertices"
 		case suzanne = "suzanne.vertices"
+		case bigMonke = "big monke.vertices"
 		case velociraptor = "velociraptor.vertices"
 		case dwaneTheCockJohnson = "dwane the cock johnson.vertices"
 	}
