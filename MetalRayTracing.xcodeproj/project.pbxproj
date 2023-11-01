@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AB24542829DCE69700A0C9D0 /* Scenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB24542729DCE69700A0C9D0 /* Scenes.swift */; };
-		AB2C20D729DDDC7D00F99842 /* DegreesToRadians.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2C20D629DDDC7D00F99842 /* DegreesToRadians.swift */; };
+		AB2C20D729DDDC7D00F99842 /* DegreeOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2C20D629DDDC7D00F99842 /* DegreeOperator.swift */; };
 		AB2C20D929DF5CF400F99842 /* SceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2C20D829DF5CF400F99842 /* SceneBuilder.swift */; };
 		AB2C20DD29DF671A00F99842 /* Mesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2C20DC29DF671A00F99842 /* Mesh.swift */; };
 		AB2C20DF29DF6F8C00F99842 /* Meshes.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB2C20DE29DF6F8C00F99842 /* Meshes.xcassets */; };
@@ -26,7 +26,7 @@
 
 /* Begin PBXFileReference section */
 		AB24542729DCE69700A0C9D0 /* Scenes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenes.swift; sourceTree = "<group>"; };
-		AB2C20D629DDDC7D00F99842 /* DegreesToRadians.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DegreesToRadians.swift; sourceTree = "<group>"; };
+		AB2C20D629DDDC7D00F99842 /* DegreeOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DegreeOperator.swift; sourceTree = "<group>"; };
 		AB2C20D829DF5CF400F99842 /* SceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneBuilder.swift; sourceTree = "<group>"; };
 		AB2C20DC29DF671A00F99842 /* Mesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mesh.swift; sourceTree = "<group>"; };
 		AB2C20DE29DF6F8C00F99842 /* Meshes.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Meshes.xcassets; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 		AB2C20D529DDDA5F00F99842 /* misc */ = {
 			isa = PBXGroup;
 			children = (
-				AB2C20D629DDDC7D00F99842 /* DegreesToRadians.swift */,
+				AB2C20D629DDDC7D00F99842 /* DegreeOperator.swift */,
 				ABD257C829D9F85000F10AB1 /* MetalRayTracing-Bridging-Header.h */,
 				ABD257C029D9F77400F10AB1 /* MetalRayTracing.entitlements */,
 				ABD257BB29D9F77300F10AB1 /* Assets.xcassets */,
@@ -199,7 +199,7 @@
 				ABD257D129DA300B00F10AB1 /* Cube.swift in Sources */,
 				ABD257C729D9F7D400F10AB1 /* Renderer.swift in Sources */,
 				ABD257B829D9F77200F10AB1 /* AppDelegate.swift in Sources */,
-				AB2C20D729DDDC7D00F99842 /* DegreesToRadians.swift in Sources */,
+				AB2C20D729DDDC7D00F99842 /* DegreeOperator.swift in Sources */,
 				AB2C20DD29DF671A00F99842 /* Mesh.swift in Sources */,
 				ABD257D329DA3F4800F10AB1 /* Triangle.swift in Sources */,
 				ABD257CC29D9F86200F10AB1 /* Shaders.metal in Sources */,

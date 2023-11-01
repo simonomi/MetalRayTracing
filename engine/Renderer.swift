@@ -143,7 +143,7 @@ class Renderer: NSObject, MTKViewDelegate {
 		uniformsPointer.pointee.width = UInt32(size.width)
 		uniformsPointer.pointee.height = UInt32(size.height)
 		
-		let fieldOfView = 45.degreesToRadians
+		let fieldOfView = 45°
 		
 		// TODO: improve cleanliness?
 		let aspectRatio = Float(size.width / size.height)
