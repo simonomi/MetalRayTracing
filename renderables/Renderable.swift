@@ -54,7 +54,7 @@ extension Renderable {
 		scale(by: SIMD3(repeating: factor))
 	}
 	
-	func scale(by factor: Float, on axis: Axis) -> Self {
+	func scale(by factor: Float, onThe axis: Axis) -> Self {
 		switch axis {
 			case .xAxis:
 				return scale(by: SIMD3(factor, 1, 1))
@@ -69,7 +69,7 @@ extension Renderable {
 		apply(.translate(displacement))
 	}
 	
-	func translate(by displacement: Float, on axis: Axis) -> Self {
+	func translate(by displacement: Float, onThe axis: Axis) -> Self {
 		switch axis {
 			case .xAxis:
 				return translate(by: SIMD3(displacement, 0, 0))
