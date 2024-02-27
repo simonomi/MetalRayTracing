@@ -26,3 +26,6 @@ Theres no export feature, no niceties, no pure spheres (mesh spheres only), no n
 ![a reflective velociraptor](https://github.com/simonomi/MetalRayTracing/blob/main/renders/velociraptor.png?raw=true)
 ![a red cube with a glowing white cube floating above it in a white box](https://github.com/simonomi/MetalRayTracing/blob/main/renders/red%20cube.png?raw=true)
 ![three spheres of varying levels of reflectiveness](https://github.com/simonomi/MetalRayTracing/blob/main/renders/three%20spheres.png?raw=true)
+
+### TODO:
+- make the mesh storage format more space-efficient so I don't have 200MB of wasted space on my machine
